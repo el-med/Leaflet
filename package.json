@@ -1,0 +1,28 @@
+{
+    "name": "LeafletjsMap",
+    "studioName": "LeafletjsMap",
+    "category": "Custom Widgets",
+    "iconPath": "/icons/widget.png",
+    "author": "Widget Developer",
+    "contributors": [
+        "Developer 1",
+        "Developer 2"
+    ],
+    "version": "1.0.0",
+    "copyright": "(c) 2014 Widget Developer",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/developer/Widget.git"
+    },
+    "keywords": ["wakanda", "widget"],
+    "engines": {"wakanda": ">= 8"},
+    "license": "MIT",
+    "loadDependencies": [
+        {"id": "Widget_V2"},
+        {"id": "LeafletjsMap/bower_components/leaflet/dist/leaflet.js", "version": "0.7.2", "path": "WIDGETS_CUSTOM"},
+        {"id": "LeafletjsMap/bower_components/leaflet/dist/leaflet.css", "version": "0.7.2", "path": "WIDGETS_CUSTOM"},
+        {"id": "LeafletjsMap/widget.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "LeafletjsMap/css/widget.css", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "LeafletjsMap/designer.js", "studioOnly": true, "version": "1.0.0", "path": "WIDGETS_CUSTOM"}
+    ]
+}
