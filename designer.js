@@ -1,27 +1,27 @@
-(function(LeafletjsMap) {
+(function(Leaflet) {
 
 //    /* Default width and height of your widget */
-    LeafletjsMap.setWidth('600');
-//    LeafletjsMap.setHeight('20');
+    Leaflet.setWidth('600');
+//    Leaflet.setHeight('20');
 
 //    /* Define custom event for your widget */
-//    LeafletjsMap.addEvent('myEvent');
+//    Leaflet.addEvent('myEvent');
 
 //    /* Customize existing properties */
-//    LeafletjsMap.customizeProperty('test', {
+//    Leaflet.customizeProperty('test', {
 //        sourceTitle: 'Test Source',
 //        title: 'Test Static Value',
 //        description: 'Add a datasource to this property.'
 //    });
 
 //    /* Add a Label property */
-//    LeafletjsMap.addLabel({
+//    Leaflet.addLabel({
 //        'defaultValue': '',
 //        'position': 'top'
 //    });
 
 //    /* Set the Design and Styles panels */
-//    LeafletjsMap.setPanelStyle({
+//    Leaflet.setPanelStyle({
 //        'fClass': true,
 //        'text': true,
 //        'background': true,
@@ -32,7 +32,7 @@
 //    });
 
 //    /* Override widget's initialization */
-//    LeafletjsMap.prototype.init = function() {
+//    Leaflet.prototype.init = function() {
 //        this.node.innerHTML = "Widget Text"; /* Include text inside the widget */
 //    }
 

@@ -2,9 +2,9 @@
 
 'use strict';
 
-WAF.define('LeafletjsMap', ['waf-core/widget'], function (widget) {
+WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
 
-    var LeafletjsMap = widget.create('LeafletjsMap', {
+    var Leaflet = widget.create('Leaflet', {
 
         items: widget.property({
             type: 'datasource',
@@ -42,7 +42,7 @@ WAF.define('LeafletjsMap', ['waf-core/widget'], function (widget) {
         }
     });
 
-    return LeafletjsMap;
+    return Leaflet;
 
 });
 

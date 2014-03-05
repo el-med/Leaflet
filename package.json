@@ -1,6 +1,6 @@
 {
-    "name": "LeafletjsMap",
-    "studioName": "LeafletjsMap",
+    "name": "Leaflet",
+    "studioName": "Leaflet",
     "category": "Custom Widgets",
     "iconPath": "/icons/widget.png",
     "author": "Widget Developer",
@@ -19,10 +19,10 @@
     "license": "MIT",
     "loadDependencies": [
         {"id": "Widget_V2"},
-        {"id": "LeafletjsMap/bower_components/leaflet/dist/leaflet.js", "version": "0.7.2", "path": "WIDGETS_CUSTOM"},
-        {"id": "LeafletjsMap/bower_components/leaflet/dist/leaflet.css", "version": "0.7.2", "path": "WIDGETS_CUSTOM"},
-        {"id": "LeafletjsMap/widget.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
-        {"id": "LeafletjsMap/css/widget.css", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
-        {"id": "LeafletjsMap/designer.js", "studioOnly": true, "version": "1.0.0", "path": "WIDGETS_CUSTOM"}
+        {"id": "Leaflet/bower_components/leaflet/dist/leaflet.js", "version": "0.7.2", "path": "WIDGETS_CUSTOM"},
+        {"id": "Leaflet/bower_components/leaflet/dist/leaflet.css", "version": "0.7.2", "path": "WIDGETS_CUSTOM"},
+        {"id": "Leaflet/widget.js", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "Leaflet/css/widget.css", "version": "1.0.0", "path": "WIDGETS_CUSTOM"},
+        {"id": "Leaflet/designer.js", "studioOnly": true, "version": "1.0.0", "path": "WIDGETS_CUSTOM"}
     ]
 }
