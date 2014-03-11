@@ -5,6 +5,11 @@
 WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
 
     var Leaflet = widget.create('Leaflet', {
+        
+        zoom: widget.property({
+            type: 'number',
+            defaultValue: 9
+        }),
 
         items: widget.property({
             type: 'datasource',
@@ -12,11 +17,14 @@ WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
                 name: 'lat'
             }, {
                 name: 'lan'
+            },{
+                name: 'popups'
             }]
         }),
 
         init: function () {
             var self = this,
+                marker,
                 map = L.map(this.node),
                 osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 osmAttrib = 'Map data &copy; OpenStreetMap contributors',
@@ -24,18 +32,27 @@ WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
                     attribution: osmAttrib
                 });
 
+                var lan, lat,popups;
+
             map.addLayer(osm);
 
 
             if (this.items()) {
-                this.items().addListener('currentElementChange', function () {
-                    var marker,
-                        items = self.items();
+                this.items().addListener('currentElementChange', function (elements) {
+                    var items = self.items();
+                    
+                    popups = self.items.attributeFor('popups');
+                    lan = self.items.attributeFor('lan');
+                    lat = self.items.attributeFor('lat');
 
-                    if (items.lat) {
-                        marker = L.marker([items.lan, items.lat]).addTo(map);
-                        marker.bindPopup('a marker for ' + items.name.toUpperCase());
-                        map.setView(new L.LatLng(items.lan, items.lat), 9);
+                    if (marker) {
+                        map.removeLayer(marker);
+                    }
+
+                    if (items[lat]) {
+                        marker = L.marker([items[lan], items[lat]]).addTo(map);
+                        marker.bindPopup(items[popups]);
+                        map.setView(new L.LatLng(items[lan], items[lat]), self.zoom());
                     }
                 });
             }
