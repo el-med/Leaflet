@@ -1,11 +1,17 @@
 (function(Leaflet) {
 
-//    /* Default width and height of your widget */
+    /* Default width and height of your widget */
     Leaflet.setWidth('600');
 //    Leaflet.setHeight('20');
 
-//    /* Define custom event for your widget */
-//    Leaflet.addEvent('myEvent');
+    /* Define custom event for your widget */
+    Leaflet.addEvent('click');
+    Leaflet.addEvent('dblclick');
+    Leaflet.addEvent('mousedown');
+    Leaflet.addEvent('mouseup');
+    Leaflet.addEvent('mouseover');
+    Leaflet.addEvent('mouseout');
+
 
 //    /* Customize existing properties */
 //    Leaflet.customizeProperty('test', {

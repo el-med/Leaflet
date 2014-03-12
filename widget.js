@@ -32,8 +32,9 @@ WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
                     attribution: osmAttrib
                 });
 
-                var lan, lat,popups;
+            var lan, lat,popups;
 
+            this.map = map;
             map.addLayer(osm);
 
 
@@ -55,7 +56,34 @@ WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
                         map.setView(new L.LatLng(items[lan], items[lat]), self.zoom());
                     }
                 });
-            }
+            }            
+
+            // ****** Events 
+            // Propagate map events to waf listeners
+            map.on({
+                "click": function (e) {
+                    self.fire("click", e.data);
+                },
+                "dblclick": function (e) {
+                    self.fire('dblclick', e.data);
+                },
+                "mousedown": function (e) {
+                    self.fire('mousedown', e.data);
+                },
+                "mouseup": function (e) {
+                    self.fire('mouseup', e.data);
+                },
+                "mouseover": function (e) {
+                    self.fire('mouseover', e.data);
+                },
+                "mouseout": function (e) {
+                    self.fire('mouseout', e.data);
+                }
+            });
+        },
+
+        getMap: function () {
+            return this.map;
         }
     });
 
