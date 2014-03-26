@@ -1,5 +1,5 @@
 {
-  "name": "leaflet",
+  "name": "Leaflet",
   "homepage": "https://github.com/Leaflet/Leaflet",
   "version": "0.7.2",
   "_release": "0.7.2",
@@ -8,8 +8,8 @@
     "tag": "v0.7.2",
     "commit": "72fd4fc35786b571e0b324e7fe3c4501d2b1e043"
   },
-  "_source": "git://github.com/Leaflet/Leaflet.git",
+  "_source": "https://github.com/Leaflet/Leaflet.git",
   "_target": "~0.7.2",
-  "_originalSource": "leaflet",
+  "_originalSource": "https://github.com/Leaflet/Leaflet.git",
   "_direct": true
 }
