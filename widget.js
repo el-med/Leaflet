@@ -25,38 +25,37 @@ WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
         init: function () {
             var self = this,
                 marker,
-                map = L.map(this.node),
-                osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                osmAttrib = 'Map data &copy; OpenStreetMap contributors',
-                osm = new L.TileLayer(osmUrl, {
-                    attribution: osmAttrib
-                });
-
-            var lan, lat,popups;
+                map = L.map(this.node);
+        
+            map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; OpenStreetMap contributors'
+            }));
 
             this.map = map;
-            map.addLayer(osm);
 
+            function update() {
+                var items = self.items();
+                var latlng = new L.LatLng(items.lat, items.lan);
+
+                map.setView(latlng, self.zoom());
+
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+
+                marker = L.marker(latlng).addTo(map);
+
+                if (items.popups) {
+                    marker.bindPopup(items.popups);
+                    marker.openPopup();
+                }
+            }
 
             if (this.items()) {
-                this.items().addListener('currentElementChange', function (elements) {
-                    var items = self.items();
-                    
-                    popups = self.items.attributeFor('popups');
-                    lan = self.items.attributeFor('lan');
-                    lat = self.items.attributeFor('lat');
-
-                    if (marker) {
-                        map.removeLayer(marker);
-                    }
-
-                    if (items[lat]) {
-                        marker = L.marker([items[lan], items[lat]]).addTo(map);
-                        marker.bindPopup(items[popups]);
-                        map.setView(new L.LatLng(items[lan], items[lat]), self.zoom());
-                    }
-                });
-            }            
+                //One day maybe.
+                //this.items().addListener('currentElementChange', update);
+                update();
+            }
 
             // ****** Events 
             // Propagate map events to waf listeners
