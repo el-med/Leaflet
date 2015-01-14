@@ -5,84 +5,70 @@
 WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
 
     var Leaflet = widget.create('Leaflet', {
-        
-        zoom: widget.property({
-            type: 'number',
-            defaultValue: 9
-        }),
+   
+        // Properties
+        zoom: widget.property({ type: 'number', defaultValue: 10 }),
+        lat:  widget.property({ type: 'number', defaultValue: 0 }),
+        lan:  widget.property({ type: 'number', defaultValue: 0 }),
+        text: widget.property({ type: 'string' }),
 
-        items: widget.property({
-            type: 'datasource',
-            attributes: [{
-                name: 'lat'
-            }, {
-                name: 'lan'
-            },{
-                name: 'popups'
-            }]
-        }),
-
+        // Initialize widget
         init: function () {
-            var self = this,
-                marker,
-                map = L.map(this.node);
-        
-            map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            var subscriber;
+
+            this._map = L.map(this.node);
+            this._map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; OpenStreetMap contributors'
             }));
 
-            this.map = map;
+            // Listen for updates
+            subscriber = this.subscribe('change', this._update, this);
+            subscriber.options.once = true;
+            this._update();
 
-            function update() {
-                var items = self.items();
-                var latlng = new L.LatLng(items.lat, items.lan);
-
-                map.setView(latlng, self.zoom());
-
-                if (marker) {
-                    map.removeLayer(marker);
-                }
-
-                marker = L.marker(latlng).addTo(map);
-
-                if (items.popups) {
-                    marker.bindPopup(items.popups);
-                    marker.openPopup();
-                }
-            }
-
-            if (this.items()) {
-                //One day maybe.
-                //this.items().addListener('currentElementChange', update);
-                update();
+            function proxyEvent(eventName, self) {
+                return function (e) {
+                    self.fire(eventName, e.data);
+                };
             }
 
             // ****** Events 
             // Propagate map events to waf listeners
-            map.on({
-                "click": function (e) {
-                    self.fire("click", e.data);
-                },
-                "dblclick": function (e) {
-                    self.fire('dblclick', e.data);
-                },
-                "mousedown": function (e) {
-                    self.fire('mousedown', e.data);
-                },
-                "mouseup": function (e) {
-                    self.fire('mouseup', e.data);
-                },
-                "mouseover": function (e) {
-                    self.fire('mouseover', e.data);
-                },
-                "mouseout": function (e) {
-                    self.fire('mouseout', e.data);
-                }
+            this._map.on({
+                "click":     proxyEvent('click',     this),
+                "dblclick":  proxyEvent('dblclick',  this),
+                "mousedown": proxyEvent('mousedown', this),
+                "mouseup":   proxyEvent('mouseup',   this),
+                "mouseover": proxyEvent('mouseover', this),
+                "mouseout":  proxyEvent('mouseout',  this)
             });
         },
 
+        // Return map object
         getMap: function () {
-            return this.map;
+            return this._map;
+        },
+
+        // Update map view
+        _update: function () {
+            var latlng = new L.LatLng(this.lat() || 0, this.lan() || 0);
+            this._map.setView(latlng, this.zoom() || 0);
+
+            if (!this._marker) {
+                this._marker = L.marker(latlng);
+                this._marker.addTo(this._map);
+            }
+
+            this._marker.setLatLng(latlng);
+
+            if (this.text()) {
+                this._marker.bindPopup(this.text());
+                this._marker.openPopup();
+            }
+            else {
+                this._marker.setPopupContent('');
+                this._marker.closePopup();
+            }
         }
     });
 

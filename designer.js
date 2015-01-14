@@ -14,7 +14,6 @@
 
     // Override init function
     Leaflet.prototype.init = function(){
-        this.node.innerHTML = '';
-        this.node.className += ' studio';
+        this.node.innerHTML = '<div class="waf-studio-donotsave waf-leaflet studio"></div>';
     };
 });
