@@ -53,6 +53,7 @@ WAF.define('Leaflet', ['waf-core/widget'], function (widget) {
         _update: function () {
             var latlng = new L.LatLng(this.lat() || 0, this.lan() || 0);
             this._map.setView(latlng, this.zoom() || 0);
+            this._map.invalidateSize();
 
             if (!this._marker) {
                 this._marker = L.marker(latlng);
